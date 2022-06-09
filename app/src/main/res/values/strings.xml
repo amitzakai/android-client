@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">OSAPP</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_lgbutton">Login</string>
+    <string name="osapp_login">OSAPP</string>
+    <string name="register_username">Username</string>
+    <string name="register_nickname">Nickname</string>
+    <string name="register_password">Password</string>
+    <string name="register_confirm_password">Confirm Password</string>
+    <string name="register_btn">Register</string>
+    <string name="login_register_here_btn">Register Here!</string>
+</resources>
