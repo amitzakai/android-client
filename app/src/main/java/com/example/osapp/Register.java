@@ -22,6 +22,8 @@ public class Register extends AppCompatActivity {
             if(password.getText().toString().equals(conPass.getText().toString())) {
                 Intent i = new Intent(this, Chats.class);
                 startActivity(i);
+            } else {
+
             }
         });
     }
