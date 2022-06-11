@@ -23,7 +23,6 @@ public class Register extends AppCompatActivity {
                 Intent i = new Intent(this, Chats.class);
                 startActivity(i);
             } else {
-
             }
         });
     }
