@@ -22,6 +22,7 @@ public class Login extends AppCompatActivity {
 
         Button btn_reg = findViewById(R.id.register_log_btn);
         btn_reg.setOnClickListener(v -> {
+
             Intent i = new Intent(this, Register.class);
             startActivity(i);
         });
