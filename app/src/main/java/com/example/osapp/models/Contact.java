@@ -1,14 +1,28 @@
 package com.example.osapp.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import com.example.osapp.services.MessageService;
 
+@Entity
 public class Contact {
+    @PrimaryKey(autoGenerate = true)
     private String id;
     private String name;
     private MessageService messages;
     private String server;
     private String last;
     private String lastdate;
+
+    public Contact(String id, String name, MessageService messages, String server, String last, String lastdate) {
+        this.id = id;
+        this.name = name;
+        this.messages = messages;
+        this.server = server;
+        this.last = last;
+        this.lastdate = lastdate;
+    }
 
     //id:
     public String getId() {

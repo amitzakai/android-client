@@ -39,6 +39,8 @@ public class ApiUser {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 Intent i = new Intent(a, Chats.class);
+                i.putExtra("userName", id);
+                i.putExtra("nickName", nickName);
                 a.startActivity(i);
             }
 
@@ -80,6 +82,8 @@ public class ApiUser {
                 if(response.code() == 200) {
                     if(password.equals(response.body().getPassword())) {
                         Intent i = new Intent(a, Chats.class);
+                        i.putExtra("userName", response.body().getId());
+                        i.putExtra("nickName", response.body().getNickName());
                         a.startActivity(i);
                     } else {
                         tv1.setText("invalid password");
