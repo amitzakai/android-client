@@ -11,11 +11,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.osapp.adapters.ContactsListAdapter;
 import com.example.osapp.models.Contact;
 import com.example.osapp.services.MessageService;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,16 +27,13 @@ import java.util.List;
 import API.ApiContact;
 
 public class Chats extends AppCompatActivity {
-
+//amit
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
-//        String nickName = i.getStringExtra("nickName");
-//        TextView tv = (TextView)findViewById(R.id.nick_name);
-//        tv.setText("hello " + nickName);
 
         setContentView(R.layout.activity_chats);
 
@@ -54,6 +55,7 @@ public class Chats extends AppCompatActivity {
             Contact c = new Contact(user, nick, new MessageService(), server, null, null);
             api.addContact(i.getStringExtra("userName"), c, adapter, this);
         });
+
     }
 
 //    @SuppressLint("SetTextI18n")
@@ -69,12 +71,6 @@ public class Chats extends AppCompatActivity {
 ////        lstContacts.setLayoutManager(new LinearLayoutManager(this));
 ////        ApiContact api = new ApiContact();
 ////        api.getAll(i.getStringExtra("userName"), adapter);
-//
-//        Intent i = getIntent();
-//        String nickName = i.getStringExtra("nickName");
-//        TextView tv = (TextView)findViewById(R.id.nick_name);
-//        tv.setText("hello " + nickName);
-//
-//
+
 //    }
 }
