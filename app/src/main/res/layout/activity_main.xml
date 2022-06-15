@@ -25,20 +25,24 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/login_username"
             android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/login_password"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <TextView
             android:id="@+id/textView3"
@@ -70,10 +74,12 @@
             android:id="@+id/imageView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:contentDescription="TODO"
             android:padding="15dp"
             android:scaleX="2"
             android:scaleY="2"
-            app:srcCompat="@drawable/ic_login_up" />
+            app:srcCompat="@drawable/ic_login_up"
+            tools:ignore="ImageContrastCheck" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -99,9 +105,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
+            android:padding="10dp"
             android:text="doesn't have account yet?"
-            android:textSize="18sp"
-            android:padding="10dp"/>
+            android:textColor="#6D4C41"
+            android:textSize="18sp" />
 
         <Button
             android:id="@+id/register_log_btn"
