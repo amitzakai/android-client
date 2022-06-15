@@ -51,16 +51,14 @@ public class ApiContact {
     }
 
 
-    public void addNewContact(String id, Contact c, ContactsListAdapter adapter, AppCompatActivity a) {
+    public void addNewContact(String id, Contact c, AppCompatActivity a) {
         Call<Void> call = api.addContact(id, c);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
-                if(adapter != null && a != null) {
-                    getAll(id, adapter);
-                    Intent i = new Intent(a, Conversation.class);
-                    i.putExtra("userName", c.getId());
-                    i.putExtra("nickName", c.getName());
+                if(a != null) {
+                    Intent i = new Intent(a, Chats.class);
+                    i.putExtra("userName", id);
                     a.startActivity(i);
                 }
             }
@@ -78,7 +76,7 @@ public class ApiContact {
             public void onResponse(Call<User> call, Response<User> response) {
                 Contact user = new Contact(id, response.body().getNickName(), new MessageService()
                         , response.body().getServer(), null, null);
-                addContact(c.getId(), user, null, null);
+                addContact(c.getId(), user, null);
             }
 
             @Override
@@ -87,7 +85,7 @@ public class ApiContact {
             }
         });
     }
-    public void addContact(String id, Contact c, ContactsListAdapter adapter, AppCompatActivity a) {
+    public void addContact(String id, Contact c, AppCompatActivity a) {
         Call<List<Contact>> call = api.getAllContacts(id);
         call.enqueue(new Callback<List<Contact>>() {
             @SuppressLint("SetTextI18n")
@@ -98,7 +96,7 @@ public class ApiContact {
                 } else {
                     if(server.equals(c.getServer())) {
                         contactAddUser(id, c);
-                        addNewContact(id, c, adapter, a);
+                        addNewContact(id, c, a);
                     }
                     // invitation + add contact
                 }
