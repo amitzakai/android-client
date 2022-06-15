@@ -14,10 +14,10 @@
         tools:layout_editor_absoluteY="0dp">
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/lstContacts"
+            android:id="@+id/lscontact"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/darker_gray" />
+             />
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

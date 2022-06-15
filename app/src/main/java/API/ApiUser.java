@@ -102,7 +102,7 @@ public class ApiUser {
     }
 
     public void getAll(TextView tv) {
-        Call<List<User>> call = api.getAll();
+        Call<List<User>> call = api.getAllUsers();
         call.enqueue(new Callback<List<User>>() {
             @SuppressLint("SetTextI18n")
             @Override
