@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.osapp.adapters.ContactsListAdapter;
@@ -28,18 +30,10 @@ public class Chats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
-        String nickName = i.getStringExtra("nickName");
-        TextView tv = (TextView)findViewById(R.id.nick_name);
-        tv.setText("hello " + nickName);
+//        String nickName = i.getStringExtra("nickName");
+//        TextView tv = (TextView)findViewById(R.id.nick_name);
+//        tv.setText("hello " + nickName);
 
-
-    }
-
-    @SuppressLint("SetTextI18n")
-    @Override
-    protected void onResume() {
-        super.onResume();
-        Intent i = getIntent();
         setContentView(R.layout.activity_chats);
 
         RecyclerView lstContacts = findViewById(R.id.lscontact);
@@ -48,5 +42,39 @@ public class Chats extends AppCompatActivity {
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
         ApiContact api = new ApiContact();
         api.getAll(i.getStringExtra("userName"), adapter);
+
+        Button btn_reg = findViewById(R.id.add_button);
+        btn_reg.setOnClickListener(v -> {
+            EditText userName = (EditText)findViewById(R.id.user_name_to_add);
+            String user = userName.getText().toString();
+            EditText nickName = (EditText)findViewById(R.id.nick_name_to_add);
+            String nick = nickName.getText().toString();
+            EditText serverName = (EditText)findViewById(R.id.server_name_to_add);
+            String server = serverName.getText().toString();
+            Contact c = new Contact(user, nick, new MessageService(), server, null, null);
+            api.addContact(i.getStringExtra("userName"), c, adapter, this);
+        });
     }
+
+//    @SuppressLint("SetTextI18n")
+//    @Override
+//    protected void onResume() {
+//        super.onResume();
+////        Intent i = getIntent();
+////        setContentView(R.layout.activity_chats);
+////
+////        RecyclerView lstContacts = findViewById(R.id.lscontact);
+////        final ContactsListAdapter adapter = new ContactsListAdapter(this);
+////        lstContacts.setAdapter(adapter);
+////        lstContacts.setLayoutManager(new LinearLayoutManager(this));
+////        ApiContact api = new ApiContact();
+////        api.getAll(i.getStringExtra("userName"), adapter);
+//
+//        Intent i = getIntent();
+//        String nickName = i.getStringExtra("nickName");
+//        TextView tv = (TextView)findViewById(R.id.nick_name);
+//        tv.setText("hello " + nickName);
+//
+//
+//    }
 }

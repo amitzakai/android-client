@@ -5,6 +5,8 @@ import androidx.room.PrimaryKey;
 
 import com.example.osapp.services.MessageService;
 
+import java.util.List;
+
 @Entity
 public class Contact {
     @PrimaryKey(autoGenerate = true)
@@ -70,5 +72,16 @@ public class Contact {
     }
     public void setLastdate(String lastdate) {
         this.lastdate = lastdate;
+    }
+
+
+    public boolean findContact(List<Contact> list) {
+        int size = list.size(), i;
+        for (i=0; i<size; i++) {
+            if ((this.getId().equals(list.get(i).getId()))
+                    && (this.getServer().equals(list.get(i).getServer())))
+                return true;
+        }
+        return false;
     }
 }
