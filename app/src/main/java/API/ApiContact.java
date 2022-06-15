@@ -10,6 +10,7 @@ import com.example.osapp.Chats;
 import com.example.osapp.Conversation;
 import com.example.osapp.adapters.ContactsListAdapter;
 import com.example.osapp.models.Contact;
+import com.example.osapp.models.Invitation;
 import com.example.osapp.models.User;
 import com.example.osapp.services.MessageService;
 
@@ -76,7 +77,7 @@ public class ApiContact {
             public void onResponse(Call<User> call, Response<User> response) {
                 Contact user = new Contact(id, response.body().getNickName(), new MessageService()
                         , response.body().getServer(), null, null);
-                addContact(c.getId(), user, null);
+                addNewContact(c.getId(), user, null);
             }
 
             @Override
@@ -85,20 +86,64 @@ public class ApiContact {
             }
         });
     }
-    public void addContact(String id, Contact c, AppCompatActivity a) {
+
+    public void add_contact_in_my_server(String id, Contact c, AppCompatActivity a, TextView txt) {
+        Call<User> call = api.getUser(c.getId());
+        call.enqueue(new Callback<User>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<User> call, Response<User> response) {
+                if(response.code() == 200) {
+                    contactAddUser(id, c);
+                    addNewContact(id, c, a);
+                } else
+                    txt.setText(c.getId() + "does not exist in your server, try another server!");
+            }
+
+            @Override
+            public void onFailure(Call<User> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void add_contact_in_another_server(String id, Contact c, AppCompatActivity a
+            , TextView txt) {
+        Invitation i = new Invitation(id, c.getId(), "http://10.0.2.2:7249/");
+        Call<Void> call = api.invitation(i);
+        call.enqueue(new Callback<Void>() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if(response.code() == 200)
+                    addNewContact(id, c, a);
+                else
+                    txt.setText("sorry! we cannot find this contact in that server, make sure it" +
+                            " is the correct userName!");
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+
+            }
+        });
+    }
+
+    public void addContact(String id, Contact c, AppCompatActivity a, TextView txt) {
         Call<List<Contact>> call = api.getAllContacts(id);
         call.enqueue(new Callback<List<Contact>>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 if(c.findContact(response.body())) {
-
+                    txt.setText("you already have this contact!");
                 } else {
                     if(server.equals(c.getServer())) {
-                        contactAddUser(id, c);
-                        addNewContact(id, c, a);
+                        txt.setText("");
+                        add_contact_in_my_server(id, c, a, txt);
+                    } else {
+                        add_contact_in_another_server(id, c, a, txt);
                     }
-                    // invitation + add contact
                 }
             }
 

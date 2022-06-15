@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.osapp.models.Contact;
 import com.example.osapp.services.MessageService;
@@ -30,7 +31,8 @@ public class AddContact extends AppCompatActivity {
             EditText serverName = (EditText)findViewById(R.id.add_contact_server);
             String server = serverName.getText().toString();
             Contact c = new Contact(user, nick, new MessageService(), server, null, null);
-            api.addContact(i.getStringExtra("userName"), c, this);
+            TextView txt = findViewById(R.id.has_this_contact);
+            api.addContact(i.getStringExtra("userName"), c, this, txt);
         });
     }
 }

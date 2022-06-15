@@ -5,6 +5,7 @@ package API;
 import java.util.List;
 
 import com.example.osapp.models.Contact;
+import com.example.osapp.models.Invitation;
 import com.example.osapp.models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -27,4 +28,7 @@ public interface Api {
 
     @POST("contacts/{id}")
     Call<Void> addContact(@Path("id") String id, @Body Contact c);
+
+    @POST("api/invitations")
+    Call<Void> invitation(@Body Invitation i);
 }
