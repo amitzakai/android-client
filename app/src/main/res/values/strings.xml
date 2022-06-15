@@ -10,4 +10,7 @@
     <string name="register_confirm_password">Confirm Password</string>
     <string name="register_btn">Register</string>
     <string name="login_register_here_btn">Register Here!</string>
+    <string name="add_nickname">Nickname</string>
+    <string name="add_b">Add</string>
+    <string name="nickname_add">Nickname</string>
 </resources>
