@@ -9,11 +9,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import com.example.osapp.adapters.ContactsListAdapter;
 import com.example.osapp.models.Contact;
 import com.example.osapp.services.MessageService;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,6 +39,12 @@ public class Chats extends AppCompatActivity {
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
         ApiContact api = new ApiContact();
         api.getAll(i.getStringExtra("userName"), adapter);
+
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(v -> {
+            Intent j = new Intent(this, AddContact.class);
+            startActivity(j);
+        });
 
     }
 
