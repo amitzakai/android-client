@@ -56,6 +56,7 @@ public class Chats extends AppCompatActivity {
                 intent.putExtra("name", a.getContacts().get(position).getName());
                 intent.putExtra("Contact", a.getContacts().get(position).getId());
                 intent.putExtra("User", getIntent().getStringExtra("userName"));
+                intent.putExtra("Server", a.getContacts().get(position).getServer());
 
                 startActivity(intent);
             }
