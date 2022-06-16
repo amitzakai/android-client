@@ -79,6 +79,7 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
         }
     }
 
+
     public List<Contact> getContacts() {return contacts;}
 
     public interface RecycleViewClickListener{
