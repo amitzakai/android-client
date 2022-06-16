@@ -29,6 +29,7 @@ public class ApiContact {
     private Api api;
     String request = "http://10.0.2.2:7249/api/";
     String server = "7249";
+
     public ApiContact() {
         r = new Retrofit.Builder().baseUrl(request)
                 .addConverterFactory(GsonConverterFactory.create()).build();
@@ -109,8 +110,11 @@ public class ApiContact {
 
     public void add_contact_in_another_server(String id, Contact c, AppCompatActivity a
             , TextView txt) {
+        Retrofit rOtherServer = new Retrofit.Builder().baseUrl(c.getServer())
+                .addConverterFactory(GsonConverterFactory.create()).build();
+        Api apiOtherServer = rOtherServer.create(Api.class);
         Invitation i = new Invitation(id, c.getId(), "http://10.0.2.2:7249/");
-        Call<Void> call = api.invitation(i);
+        Call<Void> call = apiOtherServer.invitation(i);
         call.enqueue(new Callback<Void>() {
             @SuppressLint("SetTextI18n")
             @Override
@@ -124,7 +128,8 @@ public class ApiContact {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                txt.setText("sorry! we cannot find this contact in that server, make sure it" +
+                        " is the correct userName!");
             }
         });
     }
