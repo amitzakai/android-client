@@ -61,6 +61,7 @@ public class Conversation extends AppCompatActivity {
                 api.sendMessage(user, contact, "7249"
                         ,adapter, m);
             }
+
         });
     }
 

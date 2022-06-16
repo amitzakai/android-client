@@ -59,7 +59,7 @@ public class ApiMessage {
             }
         });
     }
-
+    //
     public void send_message_another_server(String user, String contact, String server
             , MessageAdapter adapter, Message m) {
         Retrofit rOtherServer = new Retrofit.Builder().baseUrl(server)
