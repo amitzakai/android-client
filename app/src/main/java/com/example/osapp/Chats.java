@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.osapp.adapters.ContactsListAdapter;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -14,7 +15,9 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import API.ApiContact;
 
 public class Chats extends AppCompatActivity {
-//amit
+
+    private ContactsListAdapter.RecycleViewClickListener listener;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +27,8 @@ public class Chats extends AppCompatActivity {
         setContentView(R.layout.activity_chats);
 
         RecyclerView lstContacts = findViewById(R.id.lscontact);
-        final ContactsListAdapter adapter = new ContactsListAdapter(this);
+        setOnClickListener();
+        final ContactsListAdapter adapter = new ContactsListAdapter(this, this.listener);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
         ApiContact api = new ApiContact();
@@ -36,6 +40,17 @@ public class Chats extends AppCompatActivity {
             startActivity(j);
         });
 
+    }
+
+    private void setOnClickListener() {
+        this.listener = new ContactsListAdapter.RecycleViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(getApplicationContext(), Conversation.class);
+                //intent.putExtra()
+                startActivity(intent);
+            }
+        };
     }
 
 //    @SuppressLint("SetTextI18n")

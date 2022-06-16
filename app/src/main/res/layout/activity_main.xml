@@ -30,7 +30,9 @@
             android:hint="@string/login_username"
             android:inputType="textPersonName"
             android:minHeight="48dp"
-            android:textColorHint="#6D4C41" />
+            android:textColorHighlight="#513737"
+            android:textColorHint="#6D4C41"
+            android:textColorLink="#272222" />
 
         <EditText
             android:id="@+id/editTextTextPassword"
