@@ -16,6 +16,6 @@ public class Conversation extends AppCompatActivity {
         setContentView(R.layout.activity_conversation);
 
         TextView t = findViewById(R.id.ohad);
-        t.setText("say hello to " + getIntent().getStringExtra("nickName"));
+        t.setText("say hello to " + getIntent().getStringExtra("name"));
     }
 }
