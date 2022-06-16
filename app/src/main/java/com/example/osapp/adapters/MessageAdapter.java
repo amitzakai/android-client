@@ -25,11 +25,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
         private final TextView content;
         //private final TextView created;
+        //private boolean sent;
 
         private MessageViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
           //  created = itemView.findViewById(R.id.time);
+            //sent = false;
         }
     }
 
@@ -40,8 +42,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     @Override
     public MessageViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
-
-        View itemView = mInFlater.inflate(R.layout.message_right, parent, false);
+        View itemView;
+        if(viewType == 1){
+            itemView = mInFlater.inflate(R.layout.message_left, parent, false);
+        } else {
+            itemView = mInFlater.inflate(R.layout.message_right, parent, false);
+        }
         return new MessageViewHolder(itemView);
     }
 
@@ -51,6 +57,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
             final Message current = messages.get(position);
             holder.content.setText(current.getContent());
             //holder.created.setText(current.getCreated());
+            //holder.sent = current.getSent();
         }
     }
 
@@ -70,5 +77,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
 
     public List<Message> getMessages() {return messages;}
 
+    @Override
+    public int getItemViewType(int position){
+        if(messages.get(position).getSent()){
+            return 1;
+        } else {
+            return 0;
+        }
+    }
 }
 
