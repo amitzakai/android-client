@@ -1,14 +1,19 @@
 package com.example.osapp.adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.osapp.AddContact;
+import com.example.osapp.Conversation;
 import com.example.osapp.R;
 import com.example.osapp.models.Contact;
 
@@ -16,7 +21,7 @@ import java.util.List;
 
 public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapter.ContactViewHolder> {
 
-    class ContactViewHolder extends RecyclerView.ViewHolder {
+    class ContactViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private final TextView name;
         private final TextView last;
         private final TextView lastDate;
@@ -26,13 +31,23 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
             name = itemView.findViewById(R.id.name);
             last = itemView.findViewById(R.id.last);
             lastDate = itemView.findViewById(R.id.lastDate);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v, getAdapterPosition());
         }
     }
 
     private final LayoutInflater mInFlater;
     private List<Contact> contacts;
+    public RecycleViewClickListener listener;
 
-    public ContactsListAdapter(Context context) {mInFlater = LayoutInflater.from(context);}
+    public ContactsListAdapter(Context context, RecycleViewClickListener listener) {
+        this.mInFlater = LayoutInflater.from(context);
+        this.listener = listener;
+    }
 
     @Override
     public ContactViewHolder onCreateViewHolder(ViewGroup parent, int viewType){
@@ -65,4 +80,8 @@ public class ContactsListAdapter extends RecyclerView.Adapter<ContactsListAdapte
     }
 
     public List<Contact> getContacts() {return contacts;}
+
+    public interface RecycleViewClickListener{
+        void onClick(View v, int position);
+    }
 }

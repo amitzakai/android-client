@@ -1,8 +1,6 @@
 package com.example.osapp;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -13,21 +11,16 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import android.view.View;
-import android.widget.TextView;
 
 import com.example.osapp.adapters.ContactsListAdapter;
-import com.example.osapp.models.Contact;
-import com.example.osapp.services.MessageService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import API.ApiContact;
 
 public class Chats extends AppCompatActivity {
-//amit
+
+    private ContactsListAdapter.RecycleViewClickListener listener;
+
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +31,8 @@ public class Chats extends AppCompatActivity {
         setContentView(R.layout.activity_chats);
 
         RecyclerView lstContacts = findViewById(R.id.lscontact);
-        final ContactsListAdapter adapter = new ContactsListAdapter(this);
+        setOnClickListener();
+        final ContactsListAdapter adapter = new ContactsListAdapter(this, this.listener);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
         ApiContact api = new ApiContact();
@@ -50,6 +44,17 @@ public class Chats extends AppCompatActivity {
             j.putExtra("userName", i.getStringExtra("userName"));
             startActivity(j);
         });
+    }
+
+    private void setOnClickListener() {
+        this.listener = new ContactsListAdapter.RecycleViewClickListener() {
+            @Override
+            public void onClick(View v, int position) {
+                Intent intent = new Intent(getApplicationContext(), Conversation.class);
+                intent.putExtra("name", "ohad");
+                startActivity(intent);
+            }
+        };
     }
 
 //    @SuppressLint("SetTextI18n")
