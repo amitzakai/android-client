@@ -128,7 +128,8 @@ public class ApiContact {
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-
+                txt.setText("sorry! we cannot find this contact in that server, make sure it" +
+                        " is the correct userName!");
             }
         });
     }
