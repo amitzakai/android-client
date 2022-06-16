@@ -2,17 +2,28 @@ package com.example.osapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+
+import android.annotation.SuppressLint;
+
+
 import android.widget.TextView;
 
 public class Conversation extends AppCompatActivity {
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_conversation);
+
+
+        TextView t = findViewById(R.id.ohad);
+        t.setText("say hello to " + getIntent().getStringExtra("name"));
 
     }
 }

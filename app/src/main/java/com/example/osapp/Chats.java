@@ -7,6 +7,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+import android.widget.EditText;
+
 import android.view.View;
 
 import com.example.osapp.adapters.ContactsListAdapter;
@@ -24,6 +27,7 @@ public class Chats extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         Intent i = getIntent();
+
         setContentView(R.layout.activity_chats);
 
         RecyclerView lstContacts = findViewById(R.id.lscontact);
@@ -37,9 +41,9 @@ public class Chats extends AppCompatActivity {
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             Intent j = new Intent(this, AddContact.class);
+            j.putExtra("userName", i.getStringExtra("userName"));
             startActivity(j);
         });
-
     }
 
     private void setOnClickListener() {
@@ -57,12 +61,16 @@ public class Chats extends AppCompatActivity {
 //    @Override
 //    protected void onResume() {
 //        super.onResume();
-//
 //        Intent i = getIntent();
-//        String nickName = i.getStringExtra("nickName");
-//        TextView tv = (TextView)findViewById(R.id.nick_name);
-//        tv.setText("hello " + nickName);
 //
+//        setContentView(R.layout.activity_chats);
+//
+//        RecyclerView lstContacts = findViewById(R.id.lscontact);
+//        final ContactsListAdapter adapter = new ContactsListAdapter(this);
+//        lstContacts.setAdapter(adapter);
+//        lstContacts.setLayoutManager(new LinearLayoutManager(this));
+//        ApiContact api = new ApiContact();
+//        api.getAll(i.getStringExtra("userName"), adapter);
 //
 //    }
 }

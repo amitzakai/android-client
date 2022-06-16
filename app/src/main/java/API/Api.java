@@ -25,4 +25,6 @@ public interface Api {
     @GET("contacts/{id}")
     Call<List<Contact>> getAllContacts(@Path("id") String id);
 
+    @POST("contacts/{id}")
+    Call<Void> addContact(@Path("id") String id, @Body Contact c);
 }
