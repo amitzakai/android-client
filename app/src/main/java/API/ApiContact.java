@@ -97,7 +97,7 @@ public class ApiContact {
                     contactAddUser(id, c);
                     addNewContact(id, c, a);
                 } else
-                    txt.setText(c.getId() + "does not exist in your server, try another server!");
+                    txt.setText(c.getId() + " does not exist in your server, try another server!");
             }
 
             @Override
