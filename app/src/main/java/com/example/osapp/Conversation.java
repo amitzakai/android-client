@@ -18,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import API.ApiContact;
+import API.ApiMessage;
 
 public class Conversation extends AppCompatActivity {
 
@@ -35,11 +36,9 @@ public class Conversation extends AppCompatActivity {
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
         List<Message> messages = new ArrayList<>();
-        messages.add(new Message(1, "hello","",true));
-        messages.add(new Message(2, "hello2","",true));
-        messages.add(new Message(3, "hello3","",true));
-        messages.add(new Message(4, "hello4","",true));
-        adapter.setMessages(messages);
+        ApiMessage api = new ApiMessage();
+        api.getMessagesList(getIntent().getStringExtra("User")
+                , getIntent().getStringExtra("Contact"), adapter);
 
     }
 
