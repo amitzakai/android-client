@@ -2,8 +2,14 @@ package com.example.osapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
+import android.annotation.SuppressLint;
+
+
 import android.widget.TextView;
 
 public class Conversation extends AppCompatActivity {
@@ -15,7 +21,9 @@ public class Conversation extends AppCompatActivity {
 
         setContentView(R.layout.activity_conversation);
 
-        TextView t = findViewById(R.id.textView4);
-        t.setText("say hello to " + getIntent().getStringExtra("nickName"));
+
+        TextView t = findViewById(R.id.ohad);
+        t.setText("say hello to " + getIntent().getStringExtra("name"));
+
     }
 }

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#FBB6B6"
     tools:context=".Register"
     android:orientation="vertical">
 
@@ -31,10 +32,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/register_username"
             android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <EditText
             android:id="@+id/nick_name"
@@ -44,7 +47,8 @@
             android:ems="10"
             android:hint="@string/register_nickname"
             android:inputType="textPersonName"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <EditText
             android:id="@+id/password"
@@ -54,7 +58,8 @@
             android:ems="10"
             android:hint="@string/register_password"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <EditText
             android:id="@+id/con_pass"
@@ -64,7 +69,8 @@
             android:ems="10"
             android:hint="@string/register_confirm_password"
             android:inputType="textPassword"
-            android:minHeight="48dp" />
+            android:minHeight="48dp"
+            android:textColorHint="#6D4C41" />
 
         <TextView
             android:id="@+id/textView"
@@ -99,7 +105,9 @@
             android:padding="15dp"
             android:scaleX="2"
             android:scaleY="2"
-            app:srcCompat="@drawable/ic_login_up" />
+            app:srcCompat="@drawable/ic_login_up"
+            tools:ignore="ImageContrastCheck,ImageContrastCheck"
+            android:contentDescription="TODO" />
 
         <TextView
             android:layout_width="wrap_content"
