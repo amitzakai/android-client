@@ -6,6 +6,14 @@ public class Message {
     private String created;
     private Boolean sent;
 
+
+    public Message(int id, String content, String created, Boolean sent) {
+        this.id = id;
+        this.content = content;
+        this.created = created;
+        this.sent = sent;
+    }
+
     //id:
     public int getId() {
         return id;
