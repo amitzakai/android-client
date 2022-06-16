@@ -7,9 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.osapp.adapters.ContactsListAdapter;
@@ -20,6 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import API.ApiContact;
+import API.ApiMessage;
 
 public class Conversation extends AppCompatActivity {
 
@@ -37,17 +36,10 @@ public class Conversation extends AppCompatActivity {
         lstMessages.setAdapter(adapter);
         lstMessages.setLayoutManager(new LinearLayoutManager(this));
         List<Message> messages = new ArrayList<>();
-        messages.add(new Message(1, "hello hello hello hello hello hello hello hello hello hello hello hello hello hello","",true));
-        messages.add(new Message(2, "hello2lko;nwaefpawepghpawihepwaiehg hello hello lnsafalhello hello","",false));
-        messages.add(new Message(3, "hello3","",true));
-        messages.add(new Message(4, "hello4","",false));
-        adapter.setMessages(messages);
+        ApiMessage api = new ApiMessage();
+        api.getMessagesList(getIntent().getStringExtra("User")
+                , getIntent().getStringExtra("Contact"), adapter);
 
-    }
-
-    public void SendMessage(View view){
-        EditText message = (EditText) findViewById(R.id.send);
-        Log.d("message", message.getText().toString());
     }
 
 
