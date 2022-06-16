@@ -1,6 +1,11 @@
 package com.example.osapp.models;
 
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
+@Entity
 public class Message {
+    @PrimaryKey(autoGenerate = true)
     private int id;
     private String content;
     private String created;

@@ -51,7 +51,7 @@ public class Chats extends AppCompatActivity {
             @Override
             public void onClick(View v, int position) {
                 Intent intent = new Intent(getApplicationContext(), Conversation.class);
-                intent.putExtra("name", "ohad");
+                //intent.putExtra("name", "ohad");
                 startActivity(intent);
             }
         };
