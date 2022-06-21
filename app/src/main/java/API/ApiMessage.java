@@ -41,6 +41,10 @@ public class ApiMessage {
 
     public void send_message_to_me(String user, String contact, MessageAdapter adapter
             , Message m, boolean flag) {
+        if(!flag)
+            m.setSent(false);
+        else
+            m.setSent(true);
         Call<Void> call = api.sendMessage(user, contact, m);
         call.enqueue(new Callback<Void>() {
             @Override
@@ -55,7 +59,7 @@ public class ApiMessage {
             }
         });
     }
-
+    //
     public void send_message_another_server(String user, String contact, String server
             , MessageAdapter adapter, Message m) {
         Retrofit rOtherServer = new Retrofit.Builder().baseUrl(server)
@@ -83,7 +87,7 @@ public class ApiMessage {
             send_message_to_me(contact, user, adapter, m, false);
             send_message_to_me(user, contact, adapter, m, true);
         } else {
-
+            send_message_another_server(user, contact, server, adapter, m);
         }
     }
 }
