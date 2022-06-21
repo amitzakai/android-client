@@ -16,6 +16,15 @@
         android:theme="@style/Theme.OSAPP"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <service
+            android:name=".FBMessageService"
+            android:enabled="true"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".AddContact"
             android:exported="false" />
