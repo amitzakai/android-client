@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.osapp.Chats;
 import com.example.osapp.Conversation;
+import com.example.osapp.Dao.ContactDao;
 import com.example.osapp.adapters.ContactsListAdapter;
 import com.example.osapp.models.Contact;
+import com.example.osapp.models.ContactRemote;
 import com.example.osapp.models.Invitation;
 import com.example.osapp.models.User;
 import com.example.osapp.services.MessageService;
@@ -36,13 +38,23 @@ public class ApiContact {
         api = r.create(Api.class);
     }
 
-    public void getAll(String id, ContactsListAdapter adapter) {
+    public void getAll(String id, ContactsListAdapter adapter, ContactDao dao) {
         Call<List<Contact>> call = api.getAllContacts(id);
         call.enqueue(new Callback<List<Contact>>() {
             @SuppressLint("SetTextI18n")
             @Override
             public void onResponse(Call<List<Contact>> call, Response<List<Contact>> response) {
                 adapter.setContacts(response.body());
+                for(Contact c: response.body()){
+                    ContactRemote cr = new ContactRemote(c.getId(), c.getName(), c.getServer()
+                            , c.getLast(), c.getLastdate());
+                    cr.setUser(id);
+                    try {
+                        dao.insert(cr);
+                    } catch (Exception e){
+                        dao.update(cr);
+                    }
+                }
             }
 
             @Override

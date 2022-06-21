@@ -1,7 +1,9 @@
 package com.example.osapp.models;
 
-import com.example.osapp.services.ContactService;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import com.example.osapp.services.ContactService;
 public class User {
     private String id;
     private String password;

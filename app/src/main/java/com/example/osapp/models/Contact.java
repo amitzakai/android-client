@@ -7,9 +7,7 @@ import com.example.osapp.services.MessageService;
 
 import java.util.List;
 
-@Entity
 public class Contact {
-    @PrimaryKey(autoGenerate = true)
     private String id;
     private String name;
     private MessageService messages;

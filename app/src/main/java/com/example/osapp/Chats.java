@@ -3,6 +3,7 @@ package com.example.osapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.Room;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -12,12 +13,23 @@ import android.widget.EditText;
 
 import android.view.View;
 
+import com.example.osapp.DB.ContactDB;
+import com.example.osapp.Dao.ContactDao;
 import com.example.osapp.adapters.ContactsListAdapter;
+import com.example.osapp.models.Contact;
+import com.example.osapp.models.ContactRemote;
+import com.example.osapp.services.MessageService;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import API.ApiContact;
 
 public class Chats extends AppCompatActivity {
+
+    private ContactDao dao;
+    private ContactDB db;
 
     private ContactsListAdapter.RecycleViewClickListener listener;
 
@@ -36,8 +48,20 @@ public class Chats extends AppCompatActivity {
         final ContactsListAdapter adapter = new ContactsListAdapter(this, this.listener);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
+
+        db = Room.databaseBuilder(getApplicationContext(), ContactDB.class, "contactDb")
+                .allowMainThreadQueries().build();
+        dao = db.contactDao();
+        List<ContactRemote> contactsRlist= new ArrayList<>(dao.get(i.getStringExtra("userName")));
+        List<Contact> contactsList= new ArrayList<>();
+        for(ContactRemote r: contactsRlist) {
+            Contact c = new Contact(r.getId(), r.getName(), new MessageService()
+                    , r.getServer(), r.getLast(), r.getLastdate());
+            contactsList.add(c);
+        }
+        adapter.setContacts(contactsList);
         ApiContact api = new ApiContact();
-        api.getAll(i.getStringExtra("userName"), adapter);
+        api.getAll(i.getStringExtra("userName"), adapter, dao);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(v -> {
             Intent j = new Intent(this, AddContact.class);
