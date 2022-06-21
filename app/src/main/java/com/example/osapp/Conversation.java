@@ -43,10 +43,10 @@ public class Conversation extends AppCompatActivity {
         ApiMessage api = new ApiMessage();
         String user = getIntent().getStringExtra("User");
         String contact = getIntent().getStringExtra("Contact");
+        String server = getIntent().getStringExtra("Server");
 
         api.getMessagesList(getIntent().getStringExtra("User")
                 , getIntent().getStringExtra("Contact"), adapter);
-
 
         ImageView imgFavorite = (ImageView) findViewById(R.id.imageView);
         imgFavorite.setOnClickListener(new View.OnClickListener() {
@@ -58,7 +58,7 @@ public class Conversation extends AppCompatActivity {
                 String time = now.get(Calendar.HOUR_OF_DAY) + ":" + now.get(Calendar.MINUTE);
                 editText.setText("");
                 Message m = new Message(0, content, time, true);
-                api.sendMessage(user, contact, "7249"
+                api.sendMessage(user, contact, server
                         ,adapter, m);
             }
         });
