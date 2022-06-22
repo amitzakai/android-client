@@ -24,14 +24,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
     class MessageViewHolder extends RecyclerView.ViewHolder {
 
         private final TextView content;
-        //private final TextView created;
-        //private boolean sent;
+        private final TextView created;
 
         private MessageViewHolder(View itemView) {
             super(itemView);
             content = itemView.findViewById(R.id.content);
-          //  created = itemView.findViewById(R.id.time);
-            //sent = false;
+            created = itemView.findViewById(R.id.time);
         }
     }
 
@@ -56,8 +54,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageV
         if(messages != null){
             final Message current = messages.get(position);
             holder.content.setText(current.getContent());
-            //holder.created.setText(current.getCreated());
-            //holder.sent = current.getSent();
+            holder.created.setText(current.getCreated());
         }
     }
 
