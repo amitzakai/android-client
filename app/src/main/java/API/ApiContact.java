@@ -71,9 +71,10 @@ public class ApiContact {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if(a != null) {
-                    Intent i = new Intent(a, Chats.class);
-                    i.putExtra("userName", id);
-                    a.startActivity(i);
+//                    Intent i = new Intent(a, Chats.class);
+//                    i.putExtra("userName", id);
+//                    a.startActivity(i);
+                    a.finish();
                 }
             }
 

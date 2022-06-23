@@ -30,7 +30,7 @@ public class Chats extends AppCompatActivity {
 
     private ContactDao dao;
     private ContactDB db;
-
+    private ContactsListAdapter adapter;
     private ContactsListAdapter.RecycleViewClickListener listener;
 
     @SuppressLint("SetTextI18n")
@@ -45,7 +45,7 @@ public class Chats extends AppCompatActivity {
         setOnClickListener();
 
         RecyclerView lstContacts = findViewById(R.id.lscontact);
-        final ContactsListAdapter adapter = new ContactsListAdapter(this, this.listener);
+        adapter = new ContactsListAdapter(this, this.listener);
         lstContacts.setAdapter(adapter);
         lstContacts.setLayoutManager(new LinearLayoutManager(this));
 
@@ -87,10 +87,10 @@ public class Chats extends AppCompatActivity {
         };
     }
 
-//    @SuppressLint("SetTextI18n")
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onResume() {
+        super.onResume();
 //        Intent i = getIntent();
 //
 //        setContentView(R.layout.activity_chats);
@@ -101,6 +101,18 @@ public class Chats extends AppCompatActivity {
 //        lstContacts.setLayoutManager(new LinearLayoutManager(this));
 //        ApiContact api = new ApiContact();
 //        api.getAll(i.getStringExtra("userName"), adapter);
-//
-//    }
+        db = Room.databaseBuilder(getApplicationContext(), ContactDB.class, "contactDb")
+                .allowMainThreadQueries().build();
+        dao = db.contactDao();
+        List<ContactRemote> contactsRlist= new ArrayList<>(dao.get(getIntent().getStringExtra("userName")));
+        List<Contact> contactsList= new ArrayList<>();
+        for(ContactRemote r: contactsRlist) {
+            Contact c = new Contact(r.getId(), r.getName(), new MessageService()
+                    , r.getServer(), r.getLast(), r.getLastdate());
+            contactsList.add(c);
+        }
+        adapter.setContacts(contactsList);
+        ApiContact api = new ApiContact();
+        api.getAll(getIntent().getStringExtra("userName"), adapter, dao);
+    }
 }
