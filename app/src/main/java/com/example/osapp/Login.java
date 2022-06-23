@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.google.firebase.iid.InstanceIdResult;
 
@@ -35,6 +36,12 @@ public class Login extends AppCompatActivity {
 
             Intent i = new Intent(this, Register.class);
             startActivity(i);
+        });
+
+        FloatingActionButton fab = findViewById(R.id.settings_btn);
+        fab.setOnClickListener(v -> {
+            Intent j = new Intent(this, Settings.class);
+            startActivity(j);
         });
 
         FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(Login.this, new OnSuccessListener<InstanceIdResult>() {
